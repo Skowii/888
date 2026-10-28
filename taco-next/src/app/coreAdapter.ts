@@ -53,12 +53,12 @@ export async function observeCore(url: string, now = new Date().toISOString()): 
       signal: controller.signal,
       headers: { accept: "application/json, text/plain" },
     });
-    const body = (await response.text()).slice(0, 280);
+    await response.arrayBuffer();
     return {
       status: response.ok ? "observed" : "error",
       endpoint,
       httpStatus: response.status,
-      detail: `HTTP ${response.status}. Observation text is stored only for this check. It is not a job feed and it grants no execution authority. ${body}`,
+      detail: `HTTP ${response.status}. The response body was not stored. This check is not a job feed and it grants no execution authority.`,
       observedAt: now,
       jobs: null,
       events: null,

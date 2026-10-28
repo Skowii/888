@@ -13,6 +13,12 @@ const browser = await chromium.launch({
 const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
 const errors = [];
 page.on("pageerror", (error) => errors.push(String(error)));
+page.on("console", (message) => {
+  if (message.type() !== "error") return;
+  const text = message.text();
+  if (/ERR_CONNECTION_REFUSED|Failed to load resource/i.test(text)) return;
+  errors.push(text);
+});
 
 async function shot(name) {
   await page.screenshot({ path: `${out}/${name}.png`, fullPage: true });
@@ -50,6 +56,8 @@ await page.getByTestId("planning-lane").getByText("Read the director file before
 const execution = await page.getByTestId("execution-lane").innerText();
 if (!/unavailable/i.test(execution)) throw new Error(`execution lane looked available: ${execution}`);
 if (execution.includes("job-")) throw new Error("unexpected job id");
+await page.reload({ waitUntil: "networkidle" });
+await page.getByTestId("planning-lane").getByText("Read the director file before integration.").waitFor();
 await shot("04-jobs");
 
 await page.getByRole("link", { name: "Watching Desk" }).click();
@@ -112,6 +120,10 @@ await shot("11-migration");
 await page.getByRole("link", { name: "Settings" }).click();
 await page.getByRole("button", { name: "Check health" }).click();
 await page.getByTestId("health-result").getByText("unavailable").waitFor();
+await page.getByLabel("Core health URL").fill("http://127.0.0.1:9/no-core");
+await page.getByRole("button", { name: "Check health" }).click();
+await page.getByTestId("health-result").getByText(/did not return a readable response/i).waitFor();
+await page.getByTestId("reconciliation").waitFor();
 await page.getByLabel("Density").selectOption("compact");
 await shot("12-settings");
 

@@ -11,6 +11,7 @@ import {
   createVisualJob,
   fileChatAsPlanning,
   importWorkspace,
+  MAX_IMPORT_CHARS,
   normalizeState,
   searchDrafts,
 } from "./logic";
@@ -143,5 +144,24 @@ describe("workspace truth", () => {
     expect(health.jobs).toBeNull();
     expect(health.events).toBeNull();
     expect(health.conversationId).toBeNull();
+  });
+
+  it("drops a health response body instead of displaying it", async () => {
+    const original = globalThis.fetch;
+    globalThis.fetch = async () => new Response("secret-token-should-not-appear", { status: 200 });
+    try {
+      const health = await observeCore("http://127.0.0.1:9/health", "2026-10-28T15:00:00.000Z");
+      expect(health.status).toBe("observed");
+      expect(health.detail).not.toContain("secret-token");
+      expect(health.jobs).toBeNull();
+      expect(health.events).toBeNull();
+    } finally {
+      globalThis.fetch = original;
+    }
+  });
+
+  it("rejects an oversized draft import", () => {
+    const result = importWorkspace("x".repeat(MAX_IMPORT_CHARS + 1));
+    expect(result.ok).toBe(false);
   });
 });

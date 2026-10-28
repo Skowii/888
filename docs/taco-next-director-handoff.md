@@ -2,6 +2,8 @@
 
 Isolated frontend candidate. Built in `Skowii/888` because `/mnt/AI/HEX13-vNext` was not on this machine.
 
+A later reconciliation recheck is in `docs/taco-reconciliation.md`. That pass still could not read the canonical tree, and PR #1 was not merged.
+
 ## What was actually observed
 
 - Workspace: `Skowii/888`, base `741d736` (`Initial commit`, README only).

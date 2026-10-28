@@ -162,6 +162,19 @@ export function SettingsView() {
         <h2>CLI</h2>
         <p>The z3 interactive CLI source is not in this workspace. Existing commands could not be enumerated. Shared conversation, job, and event ids: none. Review of z3-interactive-r2 remains mandatory before any frozen CLI bytes are integrated.</p>
       </section>
+      <section className="panel stack" data-testid="reconciliation">
+        <h2>Reconciliation</h2>
+        <p>
+          PR #1 was reviewed in this workspace and was not merged. <span className="mono">/mnt/AI/HEX13-vNext</span> was checked
+          again and is still absent, so live TACO features were not classified from source.
+        </p>
+        <p>
+          <span className="mono">taco-core-r1</span>, <span className="mono">taco-cockpit-r1</span>, and{" "}
+          <span className="mono">z3-interactive-r2</span> have no bytes and no hashes here. Their independent review is blocked.
+          Foreman R3 was not opened. No integration preview was built.
+        </p>
+        <p className="reason">Browser drafts under taco-ng.workspace.v1 survive refresh on this origin. They are not Core records.</p>
+      </section>
     </section>
   );
 }

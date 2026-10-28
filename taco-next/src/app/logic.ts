@@ -269,7 +269,12 @@ export function loadWorkspace(raw: string | null): { state: WorkspaceState; warn
   }
 }
 
+export const MAX_IMPORT_CHARS = 1_000_000;
+
 export function importWorkspace(raw: string): { ok: true; state: WorkspaceState } | { ok: false; error: string } {
+  if (raw.length > MAX_IMPORT_CHARS) {
+    return { ok: false, error: "Draft file is larger than 1 MB. It was not loaded." };
+  }
   try {
     const normalized = normalizeState(JSON.parse(raw) as unknown);
     if (!normalized) return { ok: false, error: "The file is not a version 1 draft workspace." };
