@@ -206,9 +206,9 @@ export function proofVisualJob(): VisualJob {
     stage("design-spec", "recorded", "Information architecture for this preview was written from the directive: command, chat, watching desk, workforce, factory, projects, capabilities, jobs, visual studio, migration, and settings."),
     stage("frontend", "recorded", "This isolated TACO Next Generation preview is the frontend implementation under test."),
     stage("backend", "blocked", "No second backend was added. Canonical Core contracts are not mounted, so integration was not attempted."),
-    stage("browser-render", "pending", "Rendering is pending a browser session against this preview. A static file check is not that session."),
+    stage("browser-render", "recorded", "Headless Chrome exercised this preview during the candidate build via taco-next/scripts/browser-check.mjs. That pass is not a visual comparison."),
     stage("visual-compare", "blocked", "Comparison needs the owner sketch or concept image. Visual similarity is unassessed."),
-    stage("functional-test", "pending", "Local module behaviour can be exercised in the browser. Canonical execution is outside this test."),
+    stage("functional-test", "recorded", "Local controls were exercised in Chrome: chat planning notes, desk deduplication, profile save, factory search, project switcher, and an empty health check. Canonical jobs, tools, and conversations were not part of the test."),
     stage("review", "pending", "Owner acceptance is not recorded. Frozen-candidate reviews are separate gates."),
   ];
   if (stages.map((item) => item.id).join() !== order.join()) {

@@ -127,6 +127,7 @@ h3 { font-size: 1rem; }
 .stat strong { font-size: 1.7rem; letter-spacing: -0.04em; }
 .stat span, .stat p { color: var(--dim); }
 .panel { display: flex; flex-direction: column; gap: 12px; }
+.panel > .btn { align-self: start; }
 .inline { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 .inline.spread { justify-content: space-between; }
 .wrap { flex-wrap: wrap; }
@@ -246,7 +247,8 @@ input:focus-visible, textarea:focus-visible, select:focus-visible, button:focus-
 }
 @media (max-width: 640px) {
   .stats, .cards, .floor { grid-template-columns: 1fr; }
-  .top-status { font-size: 0.68rem; }
+  .topbar { flex-wrap: wrap; }
+  .top-status { font-size: 0.72rem; width: 100%; }
   h1 { max-width: none; }
 }
 @media (prefers-reduced-motion: reduce) {

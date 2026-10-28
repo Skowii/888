@@ -33,7 +33,7 @@ await page.getByRole("button", { name: "Factory" }).click();
 await page.getByRole("heading", { name: "The floor shows the same records as Operator mode." }).waitFor();
 if (!(await page.getByText("Not observing. Scope empty.").count())) throw new Error("scouts look active");
 await shot("02-factory");
-await page.getByRole("link", { name: "Command Centre" }).first().click();
+await page.getByRole("button", { name: "Operator" }).click();
 await page.getByRole("heading", { name: "One floor. Nothing executing." }).waitFor();
 
 await page.getByRole("link", { name: "Z3R0TH Chat" }).click();
@@ -48,7 +48,7 @@ await shot("03-chat");
 await page.getByRole("link", { name: "Jobs & Approvals" }).click();
 await page.getByTestId("planning-lane").getByText("Read the director file before integration.").waitFor();
 const execution = await page.getByTestId("execution-lane").innerText();
-if (!execution.includes("Unavailable")) throw new Error("execution lane looked available");
+if (!/unavailable/i.test(execution)) throw new Error(`execution lane looked available: ${execution}`);
 if (execution.includes("job-")) throw new Error("unexpected job id");
 await shot("04-jobs");
 
@@ -75,7 +75,7 @@ await shot("06-profile");
 await page.getByRole("link", { name: "Factory & Academy" }).click();
 await page.getByLabel("Describe the missing capability").fill("frontend");
 await page.getByRole("button", { name: "Search existing drafts" }).click();
-await page.getByText("Master Frontend Prime").waitFor();
+await page.getByRole("radio", { name: "Master Frontend Prime" }).waitFor();
 await page.getByLabel("Describe the missing capability").fill("underwater basket weaving");
 await page.getByRole("button", { name: "Search existing drafts" }).click();
 await page.getByRole("button", { name: "Draft a new definition" }).click();
@@ -98,7 +98,7 @@ await shot("09-capabilities");
 
 await page.getByRole("link", { name: "Projects" }).click();
 await page.getByLabel("Name").fill("Northwind Books");
-await page.getByLabel("Domain").selectOption("trading");
+await page.getByRole("combobox", { name: "Domain", exact: true }).selectOption("trading");
 await page.getByRole("button", { name: "Create workspace" }).click();
 await page.getByRole("link", { name: "Northwind Books" }).waitFor();
 const navText = await page.getByRole("navigation").innerText();

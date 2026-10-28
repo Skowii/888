@@ -39,7 +39,7 @@ export function Shell({ route }: { route: Route }) {
       <a className="skip" href="#workspace">
         Skip to workspace
       </a>
-      <aside className="nav" aria-label="TACO modules">
+      <nav className="nav" aria-label="TACO modules">
         <a className="brand" href="#/command">
           <span className="brand-mark">Z3R0TH</span>
           <strong>TACO Next</strong>
@@ -49,13 +49,18 @@ export function Shell({ route }: { route: Route }) {
           <div key={group.group} className="nav-group">
             <p>{group.group}</p>
             {group.items.map((item) => (
-              <a key={item.id} href={item.href} aria-current={route.name === item.id ? "page" : undefined}>
+              <a
+                key={item.id}
+                href={item.href}
+                aria-current={mode === "operator" && route.name === item.id ? "page" : undefined}
+                onClick={() => setMode("operator")}
+              >
                 {item.label}
               </a>
             ))}
           </div>
         ))}
-      </aside>
+      </nav>
       <div className="main">
         <header className="topbar">
           <button type="button" className="btn nav-toggle" aria-expanded={navOpen} onClick={() => setNavOpen((open) => !open)}>

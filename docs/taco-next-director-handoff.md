@@ -102,7 +102,7 @@ Reusable job type `VisualJob`. Stages, in order:
 8. Functional testing
 9. Review
 
-The proof job `visual.taco-ng` records the written directive and this preview. The owner sketch and concept image were not attached, so visual analysis and visual comparison stay blocked. Similarity is `not-assessed`. Functional completeness is `partial`: the interface exists, Core behaviour does not.
+The proof job `visual.taco-ng` records the written directive and this preview. The owner sketch and concept image were not attached, so visual analysis and visual comparison stay blocked. Similarity is `not-assessed`. Functional completeness is `partial`: local screens were exercised in Chrome, and Core behaviour was not. Review stays pending.
 
 New workflows start unassessed. Attaching a reference does not flip analysis to complete. Backend can be marked out of scope for a static reconstruction, or left blocked while Core is absent. There is no screenshot-to-code generator in this candidate.
 
@@ -150,7 +150,27 @@ No live service was inspected or changed from this workspace. The preview’s he
 
 ## Browser evidence
 
-See the revision note at the end of this file after the browser pass.
+Headless Chrome (`/usr/local/bin/google-chrome`) ran `taco-next/scripts/browser-check.mjs` against the Vite preview on 29 October 2026 (Sydney). The script cleared browser drafts, then:
+
+- Command Centre showed Core unmounted and director `b2a49322` unverified. No success-rate figure was present.
+- Factory mode showed idle stations and scouts not observing.
+- Chat kept an operator line and filed it as a planning note.
+- Jobs showed that note on the planning side. The execution side stayed unavailable, with no job id.
+- Watching Desk saved an operator note and refused a repeated deduplication identity.
+- Workforce renamed Master Frontend and kept registration disabled.
+- Factory search found the renamed frontend draft, then created a new draft only after an unmatched search.
+- Visual Studio kept image analysis blocked.
+- screenshot-to-code remained “Not recorded”.
+- A trading workspace named Northwind Books stayed out of the sidebar.
+- Migration intent for the legacy route table saved as “hold”.
+- Settings health check with an empty URL returned unavailable. Compact density applied.
+- At 390px width the menu opened Watching Desk.
+
+Unit tests in `taco-next/src/app/logic.test.ts` cover the same truth boundaries: unmeasured drafts, stripped fabricated scores on import, blocked visual analysis, and a null job feed.
+
+Screenshots from that pass: `01-command`, `02-factory`, `08-visual`.
+
+A second headed Chrome pass (`taco-next/scripts/browser-demo.mjs`) walked Command Centre, the idle factory floor, Visual Studio, a local chat line, and the planning-versus-execution jobs view.
 
 ## Three next actions
 
